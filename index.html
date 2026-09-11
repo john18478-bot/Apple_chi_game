@@ -1,397 +1,44 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f0f8ff" />
-  <title>哈利的花毛衣｜閱讀大挑戰</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    html, body, #root { min-height: 100%; margin: 0; }
-    body { background: #f0f8ff; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f0f8ff">
+<title>哈利的花毛衣｜閱讀大挑戰</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,"PingFang HK","Microsoft JhengHei",sans-serif;background:#f0f8ff;color:#1f2937}.app{min-height:100vh;padding:32px 16px;display:flex;align-items:center;justify-content:center}.wrap{width:100%;max-width:768px;margin:auto}.center{text-align:center}.fade{animation:fadeIn .4s ease-out}.emoji{font-size:64px;margin-bottom:16px}.title{font-size:44px;line-height:1.15;font-weight:800;color:#1e40af;margin:0 0 28px}.tip{font-size:20px;color:#374151;background:#fef9c3;padding:16px;border-radius:16px;border:2px solid #fde047;box-shadow:0 2px 5px rgba(0,0,0,.08);display:inline-block;line-height:1.5}.btn{border:0;cursor:pointer;font-weight:700;transition:.2s;box-shadow:0 6px 14px rgba(0,0,0,.15)}.btn:active{transform:scale(.96)}.start-btn{margin-top:28px;padding:16px 32px;border-radius:999px;background:#22c55e;color:#fff;font-size:24px}.start-btn:hover{background:#16a34a}.topbar{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px 16px;border-radius:16px;border:2px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:24px;font-size:18px;font-weight:700;color:#6b7280}.blue{color:#2563eb;font-size:20px}.orange{color:#f97316;font-size:20px}.question{position:relative;background:#eff6ff;padding:28px;border-radius:24px;border:4px solid #bfdbfe;box-shadow:0 4px 10px rgba(0,0,0,.08);margin-bottom:24px}.question h2{font-size:29px;line-height:1.55;margin:0;padding-right:42px}.qnum{color:#2563eb;margin-right:8px}.speaker{width:52px;height:52px;border-radius:999px;background:#facc15;color:#713f12;border:2px solid #fff;position:absolute;right:16px;top:16px;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,.12)}.option-row{display:flex;gap:8px;margin-bottom:16px}.option-speak{width:56px;flex:0 0 56px;border-radius:16px;background:#fef9c3;color:#a16207;border:2px solid #fde68a;font-size:24px}.option{flex:1;text-align:left;padding:16px;border-radius:16px;border:2px solid #e5e7eb;background:#fff;color:#374151;font-size:20px;font-weight:600;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 5px rgba(0,0,0,.06)}.option:hover{background:#f9fafb}.option.selected{background:#dbeafe;border-color:#60a5fa;color:#1e40af;box-shadow:0 0 0 2px #60a5fa inset}.option.correct{background:#dcfce7;border-color:#22c55e;color:#166534;box-shadow:0 0 0 2px #22c55e inset}.option.wrong{background:#fee2e2;border-color:#f87171;color:#991b1b}.option.dim{background:#f9fafb;border-color:#e5e7eb;color:#9ca3af;opacity:.65}.controls{height:64px;display:flex;justify-content:center;align-items:center;margin-top:24px}.confirm,.next,.again{padding:12px 32px;border-radius:999px;color:#fff;font-size:20px}.confirm{background:#2563eb}.confirm:hover{background:#1d4ed8}.next{background:#22c55e}.next:hover{background:#16a34a}.end-card{background:#fff;padding:32px;border-radius:24px;border:4px solid #bfdbfe;box-shadow:0 8px 20px rgba(0,0,0,.12);max-width:448px;margin:0 auto}.end-card .label{font-size:24px;color:#6b7280}.score{font-size:56px;font-weight:900;color:#2563eb;margin:8px 0 16px}.message{font-size:20px;color:#ea580c;font-weight:600}.again{background:#3b82f6;margin-top:24px}.again:hover{background:#2563eb}.hidden{display:none!important}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(max-width:640px){.app{padding:20px 12px}.title{font-size:36px}.question{padding:22px 18px}.question h2{font-size:24px}.speaker{right:-6px;top:-18px}.option{font-size:18px}.tip{font-size:18px}}
+</style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel" data-presets="react">
-const { useState, useEffect } = React;
-
-// 取代外部套件匯入，改用內建 SVG 元件以確保完全獨立可執行
-const Volume2 = ({ className, title }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><title>{title}</title><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>);
-const PlayCircle = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>);
-const RotateCcw = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><polyline points="3 3 3 8 8 8"></polyline></svg>);
-const CheckCircle2 = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>);
-const XCircle = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>);
-
-// 將您提供的題目與答案重新整理，並加入干擾選項（錯項），以利進行選擇題測驗。
+<div class="app"><div id="root" class="wrap"></div></div>
+<script>
 const QUIZ_DATA = [
-  {
-    id: 1,
-    question: "「斑點狗哈利生日那天，外婆送牠一件編織了許多玫瑰花圖案的毛衣。」句子中「編織」是什麼意思？",
-    options: [
-      "用剪刀把布料剪開拼貼。",
-      "用線或毛線互相交錯結合成物品。",
-      "用顏色筆在衣服上畫畫。"
-    ],
-    correctAnswer: "用線或毛線互相交錯結合成物品。"
-  },
-  {
-    id: 2,
-    question: "哈利為什麼不喜歡外婆送的第一件毛衣？",
-    options: [
-      "因為毛衣太小不合身。",
-      "因為毛衣穿起來不夠暖和。",
-      "因為毛衣上面有玫瑰花圖案。"
-    ],
-    correctAnswer: "因為毛衣上面有玫瑰花圖案。"
-  },
-  {
-    id: 3,
-    question: "「毛衣十分合身，可是哈利並不喜歡。」句子中的「合身」是什麼意思？",
-    options: [
-      "衣服的大小穿在身上非常合適。",
-      "衣服穿在身上覺得非常緊。",
-      "衣服的顏色非常好看。"
-    ],
-    correctAnswer: "衣服的大小穿在身上非常合適。"
-  },
-  {
-    id: 4,
-    question: "在跳蚤市場，哈利把毛衣藏在攤位裡，結果發生了什麼事？",
-    options: [
-      "成功藏在玩具攤位，沒有人發現。",
-      "被其他小狗偷偷叼走了。",
-      "被路人發現並把毛衣交還給牠。"
-    ],
-    correctAnswer: "被路人發現並把毛衣交還給牠。"
-  },
-  {
-    id: 5,
-    question: "「把毛衣交還給牠」句子中的「交還」是什麼意思？",
-    options: [
-      "將物品退回或歸還給原來的主人。",
-      "把自己的東西借給別人使用。",
-      "不小心把東西弄不見了。"
-    ],
-    correctAnswer: "將物品退回或歸還給原來的主人。"
-  },
-  {
-    id: 6,
-    question: "「哈利沒有心情和孩子玩，獨個兒在院子裡悶悶不樂地坐著。」句子中的「悶悶不樂」用來形容什麼心情？",
-    options: [
-      "非常開心，想要跳舞的樣子。",
-      "心裡不高興，獨自發愁的樣子。",
-      "非常生氣，想要大聲叫的樣子。"
-    ],
-    correctAnswer: "心裡不高興，獨自發愁的樣子。"
-  },
-  {
-    id: 7,
-    question: "哈利的玫瑰花毛衣最後是怎麼消失的？",
-    options: [
-      "掉進河裡被水慢慢沖走了。",
-      "被外婆拿回去重新織過。",
-      "毛線被小鳥咬住飛上天，毛衣慢慢消失了。"
-    ],
-    correctAnswer: "毛線被小鳥咬住飛上天，毛衣慢慢消失了。"
-  },
-  {
-    id: 8,
-    question: "「哈利心花怒放，牠追著小鳥，一邊跑，一邊叫。」句子中的「心花怒放」是什麼意思？",
-    options: [
-      "形容非常開心，高興到了極點。",
-      "形容心裡很害怕，不知所措。",
-      "形容花園裡的花朵開得很漂亮。"
-    ],
-    correctAnswer: "形容非常開心，高興到了極點。"
-  },
-  {
-    id: 9,
-    question: "為什麼鳥窩看起來和哈利的毛衣很「相似」？",
-    options: [
-      "因為鳥窩剛好掉在哈利的毛衣上。",
-      "因為小鳥用哈利毛衣的毛線築成了鳥窩。",
-      "因為外婆也幫小鳥織了一個鳥窩。"
-    ],
-    correctAnswer: "因為小鳥用哈利毛衣的毛線築成了鳥窩。"
-  },
-  {
-    id: 10,
-    question: "哈利為什麼喜歡聖誕節外婆送的新毛衣？",
-    options: [
-      "因為毛衣既暖和又合身，而且是一件有黑點的白毛衣。",
-      "因為上面有牠最喜歡的骨頭圖案。",
-      "因為這件毛衣是紅色的，非常有聖誕氣氛。"
-    ],
-    correctAnswer: "因為毛衣既暖和又合身，而且是一件有黑點的白毛衣。"
-  }
+{id:1,question:"「斑點狗哈利生日那天，外婆送牠一件編織了許多玫瑰花圖案的毛衣。」句子中「編織」是什麼意思？",options:["用剪刀把布料剪開拼貼。","用線或毛線互相交錯結合成物品。","用顏色筆在衣服上畫畫。"],correctAnswer:"用線或毛線互相交錯結合成物品。"},
+{id:2,question:"哈利為什麼不喜歡外婆送的第一件毛衣？",options:["因為毛衣太小不合身。","因為毛衣穿起來不夠暖和。","因為毛衣上面有玫瑰花圖案。"],correctAnswer:"因為毛衣上面有玫瑰花圖案。"},
+{id:3,question:"「毛衣十分合身，可是哈利並不喜歡。」句子中的「合身」是什麼意思？",options:["衣服的大小穿在身上非常合適。","衣服穿在身上覺得非常緊。","衣服的顏色非常好看。"],correctAnswer:"衣服的大小穿在身上非常合適。"},
+{id:4,question:"在跳蚤市場，哈利把毛衣藏在攤位裡，結果發生了什麼事？",options:["成功藏在玩具攤位，沒有人發現。","被其他小狗偷偷叼走了。","被路人發現並把毛衣交還給牠。"],correctAnswer:"被路人發現並把毛衣交還給牠。"},
+{id:5,question:"「把毛衣交還給牠」句子中的「交還」是什麼意思？",options:["將物品退回或歸還給原來的主人。","把自己的東西借給別人使用。","不小心把東西弄不見了。"],correctAnswer:"將物品退回或歸還給原來的主人。"},
+{id:6,question:"「哈利沒有心情和孩子玩，獨個兒在院子裡悶悶不樂地坐著。」句子中的「悶悶不樂」用來形容什麼心情？",options:["非常開心，想要跳舞的樣子。","心裡不高興，獨自發愁的樣子。","非常生氣，想要大聲叫的樣子。"],correctAnswer:"心裡不高興，獨自發愁的樣子。"},
+{id:7,question:"哈利的玫瑰花毛衣最後是怎麼消失的？",options:["掉進河裡被水慢慢沖走了。","被外婆拿回去重新織過。","毛線被小鳥咬住飛上天，毛衣慢慢消失了。"],correctAnswer:"毛線被小鳥咬住飛上天，毛衣慢慢消失了。"},
+{id:8,question:"「哈利心花怒放，牠追著小鳥，一邊跑，一邊叫。」句子中的「心花怒放」是什麼意思？",options:["形容非常開心，高興到了極點。","形容心裡很害怕，不知所措。","形容花園裡的花朵開得很漂亮。"],correctAnswer:"形容非常開心，高興到了極點。"},
+{id:9,question:"為什麼鳥窩看起來和哈利的毛衣很「相似」？",options:["因為鳥窩剛好掉在哈利的毛衣上。","因為小鳥用哈利毛衣的毛線築成了鳥窩。","因為外婆也幫小鳥織了一個鳥窩。"],correctAnswer:"因為小鳥用哈利毛衣的毛線築成了鳥窩。"},
+{id:10,question:"哈利為什麼喜歡聖誕節外婆送的新毛衣？",options:["因為毛衣既暖和又合身，而且是一件有黑點的白毛衣。","因為上面有牠最喜歡的骨頭圖案。","因為這件毛衣是紅色的，非常有聖誕氣氛。"],correctAnswer:"因為毛衣既暖和又合身，而且是一件有黑點的白毛衣。"}
 ];
-
-function QuizApp() {
-  const [gameState, setGameState] = useState('start'); // 'start', 'playing', 'end'
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [isAnswerChecked, setIsAnswerChecked] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  
-  // 記錄隨機打亂後的選項，避免每次重新渲染時選項跳動
-  const [shuffledOptions, setShuffledOptions] = useState([]);
-
-  // 語音朗讀功能 (廣東話)
-  const speakText = (text) => {
-    // 停止目前正在播放的語音
-    window.speechSynthesis.cancel();
-    
-    if (!text) return;
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    
-    // 設定語言為香港粵語
-    utterance.lang = 'zh-HK';
-    // 稍微調慢語速，方便小朋友聆聽
-    utterance.rate = 0.85; 
-    utterance.pitch = 1.1;
-
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-
-    window.speechSynthesis.speak(utterance);
-  };
-
-  // 當題目改變時，打亂選項順序
-  useEffect(() => {
-    if (gameState === 'playing') {
-      const currentOptions = [...QUIZ_DATA[currentQuestionIndex].options];
-      // 簡單的陣列隨機洗牌
-      currentOptions.sort(() => Math.random() - 0.5);
-      setShuffledOptions(currentOptions);
-      // 自動朗讀題目 (可選，這裡設定為讓學生手動點擊)
-      // speakText(QUIZ_DATA[currentQuestionIndex].question);
-    }
-  }, [currentQuestionIndex, gameState]);
-
-  // 清除語音當組件卸載時
-  useEffect(() => {
-    return () => {
-      window.speechSynthesis.cancel();
-    };
-  }, []);
-
-  const startGame = () => {
-    setGameState('playing');
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setSelectedOption(null);
-    setIsAnswerChecked(false);
-  };
-
-  const handleOptionClick = (option) => {
-    if (isAnswerChecked) return; // 如果已經確認答案，就不允許更改
-    setSelectedOption(option);
-  };
-
-  const checkAnswer = () => {
-    if (!selectedOption) return;
-    
-    setIsAnswerChecked(true);
-    const correct = selectedOption === QUIZ_DATA[currentQuestionIndex].correctAnswer;
-    
-    if (correct) {
-      setScore(prev => prev + 10);
-      // 答對時給予廣東話讚賞
-      speakText("答啱啦！你好叻呀！");
-    } else {
-      speakText("唔緊要，下次再努力！");
-    }
-  };
-
-  const nextQuestion = () => {
-    window.speechSynthesis.cancel(); // 換題時停止語音
-    if (currentQuestionIndex < QUIZ_DATA.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
-      setSelectedOption(null);
-      setIsAnswerChecked(false);
-    } else {
-      setGameState('end');
-    }
-  };
-
-  const renderStartScreen = () => (
-    <div className="flex flex-col items-center justify-center space-y-8 animate-fade-in text-center">
-      <div className="text-6xl mb-4">🐶🧥</div>
-      <h1 className="text-4xl md:text-5xl font-extrabold text-blue-800 drop-shadow-sm">
-        哈利的花毛衣 <br className="md:hidden"/> 閱讀大挑戰
-      </h1>
-      <p className="text-xl text-gray-700 bg-yellow-100 p-4 rounded-2xl shadow-sm border-2 border-yellow-300">
-        點擊旁邊的 <Volume2 className="inline-block w-6 h-6 text-blue-600 mb-1 mx-1"/> 喇叭按鈕，<br/>可以聽廣東話朗讀喔！
-      </p>
-      <button 
-        onClick={startGame}
-        className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white bg-green-500 rounded-full shadow-lg hover:bg-green-600 hover:shadow-xl transition-all duration-200 text-2xl active:scale-95"
-      >
-        <PlayCircle className="w-8 h-8 mr-2 group-hover:animate-pulse" />
-        開始遊戲
-      </button>
-    </div>
-  );
-
-  const renderEndScreen = () => {
-    let message = "";
-    let emoji = "";
-    if (score === 100) {
-      message = "太棒了！你是全對的閱讀小天才！";
-      emoji = "🏆✨";
-    } else if (score >= 70) {
-      message = "表現得很好！繼續保持喔！";
-      emoji = "🌟👏";
-    } else {
-      message = "再接再厲！你可以再試一次！";
-      emoji = "💪📖";
-    }
-
-    return (
-      <div className="flex flex-col items-center justify-center space-y-6 animate-fade-in text-center">
-        <div className="text-7xl mb-2">{emoji}</div>
-        <h2 className="text-4xl font-bold text-gray-800">測驗結束！</h2>
-        <div className="bg-white p-8 rounded-3xl shadow-xl border-4 border-blue-200 w-full max-w-md">
-          <p className="text-2xl text-gray-600 mb-2">你的總得分</p>
-          <p className="text-6xl font-black text-blue-600 mb-4">{score} / 100</p>
-          <p className="text-xl text-orange-600 font-medium">{message}</p>
-        </div>
-        <button 
-          onClick={startGame}
-          className="inline-flex items-center px-6 py-3 font-bold text-white bg-blue-500 rounded-full shadow-md hover:bg-blue-600 transition-all text-xl mt-4 active:scale-95"
-        >
-          <RotateCcw className="w-6 h-6 mr-2" />
-          再玩一次
-        </button>
-      </div>
-    );
-  };
-
-  const renderPlayingScreen = () => {
-    const currentQ = QUIZ_DATA[currentQuestionIndex];
-    const isCorrect = selectedOption === currentQ.correctAnswer;
-
-    return (
-      <div className="w-full max-w-3xl mx-auto flex flex-col space-y-6 animate-fade-in">
-        {/* 進度條與分數 */}
-        <div className="flex justify-between items-center bg-white py-2 px-4 rounded-2xl shadow-sm border-2 border-gray-100">
-          <div className="text-lg font-bold text-gray-500">
-            題數：<span className="text-blue-600 text-xl">{currentQuestionIndex + 1}</span> / {QUIZ_DATA.length}
-          </div>
-          <div className="text-lg font-bold text-gray-500">
-            積分：<span className="text-orange-500 text-xl">🦴 {score}</span>
-          </div>
-        </div>
-
-        {/* 題目區 */}
-        <div className="bg-blue-50 p-6 md:p-8 rounded-3xl shadow-md border-4 border-blue-200 relative">
-          <button 
-            onClick={() => speakText(currentQ.question)}
-            className="absolute -top-5 -right-5 md:top-4 md:right-4 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 p-3 rounded-full shadow-lg transition-transform hover:scale-110 active:scale-95 flex items-center justify-center border-2 border-white"
-            title="朗讀題目"
-          >
-            <Volume2 className="w-7 h-7" />
-          </button>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 leading-relaxed pr-8">
-            <span className="text-blue-600 mr-2">Q{currentQuestionIndex + 1}.</span>
-            {currentQ.question}
-          </h2>
-        </div>
-
-        {/* 選項區 */}
-        <div className="flex flex-col space-y-4">
-          {shuffledOptions.map((option, index) => {
-            let buttonStyle = "bg-white hover:bg-gray-50 border-gray-200 text-gray-700";
-            let icon = null;
-
-            if (isAnswerChecked) {
-              if (option === currentQ.correctAnswer) {
-                buttonStyle = "bg-green-100 border-green-500 text-green-800 ring-2 ring-green-500";
-                icon = <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />;
-              } else if (option === selectedOption) {
-                buttonStyle = "bg-red-100 border-red-400 text-red-800";
-                icon = <XCircle className="w-6 h-6 text-red-500 flex-shrink-0" />;
-              } else {
-                 buttonStyle = "bg-gray-50 border-gray-200 text-gray-400 opacity-60";
-              }
-            } else if (option === selectedOption) {
-              buttonStyle = "bg-blue-100 border-blue-400 text-blue-800 ring-2 ring-blue-400";
-            }
-
-            return (
-              <div key={index} className="flex items-stretch space-x-2">
-                 <button
-                  onClick={() => speakText(option)}
-                  className="flex-shrink-0 flex items-center justify-center w-14 bg-yellow-100 hover:bg-yellow-200 text-yellow-700 rounded-2xl border-2 border-yellow-300 shadow-sm transition-colors active:scale-95"
-                  title="朗讀選項"
-                >
-                  <Volume2 className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={() => handleOptionClick(option)}
-                  disabled={isAnswerChecked}
-                  className={`flex-grow text-left p-4 rounded-2xl border-2 shadow-sm text-lg md:text-xl font-medium transition-all duration-200 flex items-center justify-between ${buttonStyle} ${!isAnswerChecked ? 'active:scale-[0.98]' : ''}`}
-                >
-                  <span className="mr-4">{option}</span>
-                  {icon}
-                </button>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* 底部控制按鈕區 */}
-        <div className="flex justify-center mt-6 h-16">
-          {!isAnswerChecked && selectedOption && (
-            <button 
-              onClick={checkAnswer}
-              className="px-8 py-3 bg-blue-600 text-white text-xl font-bold rounded-full shadow-lg hover:bg-blue-700 transition-all animate-bounce-in"
-            >
-              確定答案
-            </button>
-          )}
-          
-          {isAnswerChecked && (
-            <button 
-              onClick={nextQuestion}
-              className="px-8 py-3 bg-green-500 text-white text-xl font-bold rounded-full shadow-lg hover:bg-green-600 transition-all animate-bounce-in flex items-center"
-            >
-              {currentQuestionIndex < QUIZ_DATA.length - 1 ? '下一題 ➔' : '查看成績 🏆'}
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  return (
-    <div className="min-h-screen bg-[#f0f8ff] p-4 md:p-8 font-sans selection:bg-blue-200 flex items-center justify-center">
-      {/* 簡單的 Tailwind CSS 動畫擴充 */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounceIn { 0% { transform: scale(0.9); opacity: 0; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
-        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        .animate-bounce-in { animation: bounceIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-      `}} />
-      
-      <div className="w-full">
-        {gameState === 'start' && renderStartScreen()}
-        {gameState === 'playing' && renderPlayingScreen()}
-        {gameState === 'end' && renderEndScreen()}
-      </div>
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById('root')).render(<QuizApp />);
-
-  </script>
+let gameState='start', currentQuestionIndex=0, score=0, selectedOption=null, isAnswerChecked=false, shuffledOptions=[];
+const root=document.getElementById('root');
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function speakText(text){if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();if(!text)return;const u=new SpeechSynthesisUtterance(text);u.lang='zh-HK';u.rate=.85;u.pitch=1.1;window.speechSynthesis.speak(u);}
+function startGame(){gameState='playing';currentQuestionIndex=0;score=0;selectedOption=null;isAnswerChecked=false;shuffledOptions=shuffle(QUIZ_DATA[0].options);render();}
+function chooseOption(i){if(isAnswerChecked)return;selectedOption=shuffledOptions[i];render();}
+function checkAnswer(){if(!selectedOption)return;isAnswerChecked=true;const ok=selectedOption===QUIZ_DATA[currentQuestionIndex].correctAnswer;if(ok){score+=10;speakText('答啱啦！你好叻呀！');}else{speakText('唔緊要，下次再努力！');}render();}
+function nextQuestion(){if('speechSynthesis' in window)window.speechSynthesis.cancel();if(currentQuestionIndex<QUIZ_DATA.length-1){currentQuestionIndex++;selectedOption=null;isAnswerChecked=false;shuffledOptions=shuffle(QUIZ_DATA[currentQuestionIndex].options);}else gameState='end';render();}
+function renderStart(){root.innerHTML=`<section class="center fade"><div class="emoji">🐶🧥</div><h1 class="title">哈利的花毛衣<br>閱讀大挑戰</h1><div class="tip">點擊旁邊的 🔊 喇叭按鈕，<br>可以聽廣東話朗讀喔！</div><br><button class="btn start-btn" onclick="startGame()">▶ 開始遊戲</button></section>`;}
+function renderEnd(){let message='',emoji='';if(score===100){message='太棒了！你是全對的閱讀小天才！';emoji='🏆✨';}else if(score>=70){message='表現得很好！繼續保持喔！';emoji='🌟👏';}else{message='再接再厲！你可以再試一次！';emoji='💪📖';}root.innerHTML=`<section class="center fade"><div class="emoji">${emoji}</div><h2 style="font-size:36px;margin:0 0 24px">測驗結束！</h2><div class="end-card"><div class="label">你的總得分</div><div class="score">${score} / 100</div><div class="message">${message}</div></div><button class="btn again" onclick="startGame()">↻ 再玩一次</button></section>`;}
+function renderPlaying(){const q=QUIZ_DATA[currentQuestionIndex];const opts=shuffledOptions.map((o,i)=>{let cls='option';let icon='';if(isAnswerChecked){if(o===q.correctAnswer){cls+=' correct';icon='✓';}else if(o===selectedOption){cls+=' wrong';icon='✕';}else cls+=' dim';}else if(o===selectedOption)cls+=' selected';return `<div class="option-row"><button class="btn option-speak" onclick='speakText(${JSON.stringify(o)})' title="朗讀選項">🔊</button><button class="btn ${cls}" onclick="chooseOption(${i})" ${isAnswerChecked?'disabled':''}><span>${escapeHtml(o)}</span><span style="font-size:26px;margin-left:12px">${icon}</span></button></div>`;}).join('');root.innerHTML=`<section class="fade"><div class="topbar"><div>題數：<span class="blue">${currentQuestionIndex+1}</span> / ${QUIZ_DATA.length}</div><div>積分：<span class="orange">🦴 ${score}</span></div></div><div class="question"><button class="btn speaker" onclick='speakText(${JSON.stringify(q.question)})' title="朗讀題目">🔊</button><h2><span class="qnum">Q${currentQuestionIndex+1}.</span>${escapeHtml(q.question)}</h2></div><div>${opts}</div><div class="controls">${!isAnswerChecked&&selectedOption?'<button class="btn confirm" onclick="checkAnswer()">確定答案</button>':''}${isAnswerChecked?`<button class="btn next" onclick="nextQuestion()">${currentQuestionIndex<QUIZ_DATA.length-1?'下一題 ➔':'查看成績 🏆'}</button>`:''}</div></section>`;}
+function render(){if(gameState==='start')renderStart();else if(gameState==='playing')renderPlaying();else renderEnd();}
+window.addEventListener('beforeunload',()=>{if('speechSynthesis' in window)window.speechSynthesis.cancel();});
+render();
+</script>
 </body>
 </html>
