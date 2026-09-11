@@ -1,4 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f0f8ff" />
+  <title>哈利的花毛衣｜閱讀大挑戰</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    html, body, #root { min-height: 100%; margin: 0; }
+    body { background: #f0f8ff; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
 
 // 取代外部套件匯入，改用內建 SVG 元件以確保完全獨立可執行
 const Volume2 = ({ className, title }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><title>{title}</title><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>);
@@ -111,7 +130,7 @@ const QUIZ_DATA = [
   }
 ];
 
-export default function QuizApp() {
+function QuizApp() {
   const [gameState, setGameState] = useState('start'); // 'start', 'playing', 'end'
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -318,7 +337,7 @@ export default function QuizApp() {
                 <button
                   onClick={() => handleOptionClick(option)}
                   disabled={isAnswerChecked}
-                  className={flex-grow text-left p-4 rounded-2xl border-2 shadow-sm text-lg md:text-xl font-medium transition-all duration-200 flex items-center justify-between ${buttonStyle} ${!isAnswerChecked && 'active:scale-[0.98]'}}
+                  className={`flex-grow text-left p-4 rounded-2xl border-2 shadow-sm text-lg md:text-xl font-medium transition-all duration-200 flex items-center justify-between ${buttonStyle} ${!isAnswerChecked ? 'active:scale-[0.98]' : ''}`}
                 >
                   <span className="mr-4">{option}</span>
                   {icon}
@@ -370,3 +389,9 @@ export default function QuizApp() {
     </div>
   );
 }
+
+ReactDOM.createRoot(document.getElementById('root')).render(<QuizApp />);
+
+  </script>
+</body>
+</html>
